@@ -1,52 +1,71 @@
-Plasmid Designer
-Overview
+# Plasmid Designer
 
-This project implements an automated plasmid design pipeline.
-Given an input DNA sequence from an unknown organism, the tool:
+## Overview
 
-Detects the origin of replication (ORI) using an AT-rich sliding window approach
+This project implements an automated plasmid design pipeline in Python.
+Given a DNA sequence from an unknown organism, the tool generates a
+functional plasmid sequence compatible with the host organism.
 
-Parses a user-provided design file specifying plasmid modifications
+The pipeline performs the following steps:
 
-Applies restriction site deletions as required
+- Detects the origin of replication (ORI) using an AT-rich sliding window approach  
+- Parses a user-provided design file describing plasmid features  
+- Applies restriction site deletions as specified  
+- Outputs the final plasmid sequence in FASTA format  
 
-Outputs a functional plasmid sequence compatible with the host organism
+---
 
-Input
+## Input
 
-Input.Fa – DNA sequence of an unknown organism (test case: pUC19.fa)
+- **Input.Fa**  
+  DNA sequence of an unknown organism  
+  *(Test case used: `pUC19.fa`)*
 
-Design.txt – user-specified plasmid design instructions
+- **Design.txt**  
+  User-defined plasmid design instructions
 
-markers.tab – list of possible markers (not mandatory for core logic)
+- **markers.tab**  
+  List of possible markers (provided for reference; not required for core logic)
 
-Output
+---
 
-Output.Fa – designed plasmid sequence
+## Output
 
-ORI Detection
+- **Output.Fa**  
+  Designed plasmid DNA sequence in FASTA format
 
-The ORI is identified by scanning the sequence with a sliding window and selecting the region with the highest AT content, a standard method taught in class.
+---
 
-Restriction Site Removal
+## ORI Detection
 
-For the provided pUC19 test case, the EcoRI restriction site (GAATTC) is deleted from the plasmid as specified.
-Final output verification confirms the absence of this site.
+The origin of replication (ORI) is identified by scanning the DNA sequence
+with a sliding window and selecting the region with the highest AT content.
+This AT-rich heuristic is a standard method taught in class for bacterial
+ORI prediction.
 
-Testing
+---
 
-Unit tests verify:
+## Restriction Site Removal
 
-ORI detection
+For the provided pUC19 test case, the EcoRI restriction site  
+(**GAATTC**) is deleted from the plasmid, as specified in the assignment.
 
-Design file parsing
+The final output is verified to confirm the complete absence of the EcoRI
+recognition sequence.
 
-Complete removal of EcoRI from the final plasmid
+---
 
-All tests pass using pytest.
+## Testing
 
-How to Run
-python -m src.main
+Unit tests are implemented using **pytest** to verify:
 
+- Correct ORI detection  
+- Proper parsing of the design file  
+- Complete removal of the EcoRI restriction site  
 
-The output plasmid will be written to Output.Fa.
+All tests pass successfully.
+
+To run tests:
+
+```bash
+python -m pytest
