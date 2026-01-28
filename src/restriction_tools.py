@@ -1,4 +1,6 @@
 # Restriction enzyme recognition sequences
+# (as taught in class / standard cloning references)
+
 RESTRICTION_SITE_SEQUENCES = {
     "EcoRI": "GAATTC",
     "BamHI": "GGATCC",
@@ -15,16 +17,17 @@ RESTRICTION_SITE_SEQUENCES = {
 
 def remove_restriction_sites(sequence, enzymes):
     """
-    Removes all occurrences of restriction enzyme recognition sites
-    from the given DNA sequence.
+    Removes specified restriction enzyme recognition sites
+    from a DNA sequence.
 
     Args:
         sequence (str): DNA sequence
-        enzymes (list): List of enzyme names to remove
+        enzymes (list): List of restriction enzyme names to remove
 
     Returns:
-        str: Modified DNA sequence
+        str: Modified DNA sequence with specified sites deleted
     """
+
     modified_sequence = sequence
 
     for enzyme in enzymes:

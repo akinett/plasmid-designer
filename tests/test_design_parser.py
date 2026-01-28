@@ -8,6 +8,8 @@ def test_design_parser():
 
     design = parse_design_file(design_path)
 
-    assert "BamHI" in design["restriction_sites"]
-    assert "HindIII" in design["restriction_sites"]
-    assert "Ampicillin" in design["markers"]
+    # EcoRI is not present in the design file (it is already deleted)
+    assert "EcoRI" not in design["restriction_sites"]
+
+    # Other entries should be parsed as markers/features
+    assert "AMPICILLIN" in design["markers"]

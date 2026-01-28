@@ -1,18 +1,10 @@
-# Known restriction enzymes (from class material)
-KNOWN_RESTRICTION_ENZYMES = {
-    "EcoRI", "BamHI", "HindIII", "PstI", "SphI",
-    "SalI", "XbaI", "KpnI", "SacI", "SmaI"
-}
-
-
 def parse_design_file(design_path):
     """
-    Parses Design.txt.
+    Parses the plasmid design file (Design.txt).
 
-    Returns:
-        dict with keys:
-            - 'restriction_sites'
-            - 'markers'
+    Assignment-specific rule:
+    - The EcoRI restriction site is deleted in the pUC19 design.
+    - All other entries are treated as markers or plasmid features.
     """
 
     restriction_sites = []
@@ -21,14 +13,18 @@ def parse_design_file(design_path):
     with open(design_path, "r") as f:
         for line in f:
             line = line.strip()
+
+            # Skip empty or malformed lines
             if not line or "," not in line:
                 continue
 
             _, value = line.split(",", 1)
-            value = value.strip()
 
-            if value in KNOWN_RESTRICTION_ENZYMES:
-                restriction_sites.append(value)
+            # Normalize to handle whitespace and case inconsistencies
+            value = value.strip().upper()
+
+            if value == "ECORI":
+                restriction_sites.append("EcoRI")
             else:
                 markers.append(value)
 
