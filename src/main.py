@@ -22,3 +22,5 @@ def write_fasta(sequence, file_path, header="Designed_Plasmid"):
             f.write(sequence[i:i+70] + "\n")
 
 
+
+
