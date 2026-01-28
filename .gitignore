@@ -1,0 +1,3 @@
+# Ignore FASTA output files
+*.fa
+Output_*.fa
